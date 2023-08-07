@@ -1,22 +1,42 @@
 # xliff-json-convertor
 Convert XLIFF (XML Localization Interchange File Format) files to JSON format using this simple Flask web application.
-#Usage
-Clone or download this repository to your local machine.
 
-Install the required dependencies:
+# Try Online
 
-Copy code
-#pip install flask
-Run the Flask application:
+Deployed on [PythonAnywhere](https://www.pythonanywhere.com) - http://soha00004.pythonanywhere.com/
 
-Copy code
-#python app.py
-Open your web browser and navigate to http://localhost:5000.
+# Running locally
 
-Use the web form to upload an XLIFF file for conversion:
+```
+git clone https://github.com/sonali-hanchinamani/xliff-json-convertor.git
+cd xliff-json-convertor
+python3 -m venv venv 
+source venv/bin/activate
+sudo pip install -r requirements.txt
+python app.py 
+```
+Open your web browser and navigate to `http://localhost:5000`.
 
-Click on the "Choose File" button and select an XLIFF file (with a .xliff extension).
-Optionally, provide a download location (leave blank to use the browser's default download location).
-Click the "Convert and Download" button.
+# LICENSE
 
-The converted JSON file will be downloaded to your specified location or the default download location of your browser.
+MIT License
+
+Copyright (c) 2023 Sonali c h
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
