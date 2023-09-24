@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, send_file
 import os
-import xml.etree.ElementTree as ET
 import json
 import re
 import tempfile
@@ -8,24 +7,22 @@ import tempfile
 app = Flask(__name__)
 
 def xliff_to_json_converter(file_name: str) -> str:
-    root = ET.parse(file_name).getroot()
-    namespace = re.match(r'{.*}', root.tag).group(0)
-
-    trglang = root.get('trglang')
-    json_filename = f"{trglang}.json"
+    json_filename = "temp.json"
     json_file_path = os.path.join(tempfile.gettempdir(), json_filename)
 
     result = {}
-    for unit in root.iter(f'{namespace}unit'):
-        id_value = unit.get("id")
-        target_element = unit.find(f'{namespace}segment/{namespace}target')
-        if target_element is not None and target_element.text:
-            value = target_element.text
-            root_key, key = id_value.split('.')
-            if root_key not in result:
-                result[root_key] = {}
-            result[root_key][key] = value
-
+    with open(file_name, "r") as fhand:
+        for line in fhand:
+            if "<unit id=" in line:
+                unit_id = re.findall(r'"(.*?)"', line)[0].split(".")[0]
+                result[unit_id] = {"defaultMessage": "temp_value"}
+            elif "<target>" in line:
+                last_unit_id = list(result)[-1]
+                s = line.find("<target>")
+                e = line.find("</target>")
+                default_message = line[s+8:e]
+                result[last_unit_id] = {"defaultMessage": default_message.replace("<b>", "").replace("</b>", "")}
+                
     with open(json_file_path, 'w') as json_file:
         json.dump(result, json_file, indent=4, ensure_ascii=False)
 
